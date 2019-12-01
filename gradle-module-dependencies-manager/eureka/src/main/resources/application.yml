@@ -1,0 +1,5 @@
+eureka:
+  client:
+    # 配置 eureka 不注册自身
+    register-with-eureka: false
+    fetch-registry: false

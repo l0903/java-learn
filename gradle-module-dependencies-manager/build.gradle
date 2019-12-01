@@ -1,0 +1,37 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 11
+
+    repositories {
+        //优先从本地仓库获取
+        mavenLocal()
+        //从阿里云或者公司仓库获取
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/' //配置阿里云 或者 自己公司的仓库
+        }
+        mavenCentral()
+    }
+
+    ext {
+        set('springCloudVersion', "Hoxton.RELEASE")
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
